@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ScrollView;
 
 import static java.security.AccessController.getContext;
 
@@ -22,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if(getSupportActionBar() != null)
+            this.getSupportActionBar().hide();
         mojaDB = Database.getInstance(this);
         btnViewAll = (Button)findViewById(R.id.button_viewAll);
         btnPridaj = (Button)findViewById(R.id.button_Pridaj);
@@ -45,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Cursor res =  mojaDB.getKupeny_objektData();
+                Cursor res =  mojaDB.getObjektData();
                 if(res.getCount() == 0)
                 {
                     //message
@@ -56,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
                 while (res.moveToNext())
                 {
                     buffer.append("ID : " + res.getString(0) + "\n");
-                    buffer.append("NAZOV : " + res.getString(1) + "\n\n");
+                    buffer.append("NAZOV : " + res.getString(1) + "\n");
+                    buffer.append("TYP: " + res.getString(2) + "\n\n");
                 }
 
                 //all data
@@ -67,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showMessage(String nazov, String hlaska){
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
         builder.setTitle(nazov);

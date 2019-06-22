@@ -6,116 +6,127 @@
     android:layout_height="match_parent"
     tools:context=".vyber_objekt">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/pecivo_button"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Pečivo"
-        app:layout_constraintBottom_toTopOf="@+id/ovocie_button"
-        app:layout_constraintEnd_toStartOf="@+id/mliecne_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:columnCount="2">
 
-    <Button
-        android:id="@+id/mliecne_button"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Mliečne Výrobky"
-        app:layout_constraintBottom_toTopOf="@+id/zelenina_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/pecivo_button"
-        app:layout_constraintTop_toTopOf="parent" />
+            <Button
+                android:id="@+id/pecivo_button"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="44dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Pečivo"
+                app:layout_constraintBottom_toTopOf="@+id/ovocie_button"
+                app:layout_constraintEnd_toStartOf="@+id/mliecne_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/ovocie_button"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Ovocie"
-        app:layout_constraintBottom_toTopOf="@+id/maso_button"
-        app:layout_constraintEnd_toStartOf="@+id/zelenina_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pecivo_button" />
+            <Button
+                android:id="@+id/mliecne_button"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="44dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Mliečne Výrobky"
+                app:layout_constraintBottom_toTopOf="@+id/zelenina_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/pecivo_button"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/maso_button"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Mäso"
-        app:layout_constraintBottom_toTopOf="@+id/sladkosti_button"
-        app:layout_constraintEnd_toStartOf="@+id/suroviny_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ovocie_button" />
+            <Button
+                android:id="@+id/ovocie_button"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Ovocie"
+                app:layout_constraintBottom_toTopOf="@+id/maso_button"
+                app:layout_constraintEnd_toStartOf="@+id/zelenina_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pecivo_button" />
 
-    <Button
-        android:id="@+id/suroviny_button"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Suroviny"
-        app:layout_constraintBottom_toTopOf="@+id/ostatne_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/maso_button"
-        app:layout_constraintTop_toBottomOf="@+id/zelenina_button" />
+            <Button
+                android:id="@+id/maso_button"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Mäso"
+                app:layout_constraintBottom_toTopOf="@+id/sladkosti_button"
+                app:layout_constraintEnd_toStartOf="@+id/suroviny_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ovocie_button" />
 
-    <Button
-        android:id="@+id/sladkosti_button"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="130dp"
-        android:text="Sladkosti"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ostatne_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/maso_button" />
+            <Button
+                android:id="@+id/suroviny_button"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Suroviny"
+                app:layout_constraintBottom_toTopOf="@+id/ostatne_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/maso_button"
+                app:layout_constraintTop_toBottomOf="@+id/zelenina_button" />
 
-    <Button
-        android:id="@+id/ostatne_button"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="130dp"
-        android:text="Ostatné"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/sladkosti_button"
-        app:layout_constraintTop_toBottomOf="@+id/suroviny_button" />
+            <Button
+                android:id="@+id/sladkosti_button"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="130dp"
+                android:text="Sladkosti"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/ostatne_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/maso_button" />
 
-    <Button
-        android:id="@+id/zelenina_button"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Zelenina"
-        app:layout_constraintBottom_toTopOf="@+id/suroviny_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ovocie_button"
-        app:layout_constraintTop_toBottomOf="@+id/mliecne_button" />
+            <Button
+                android:id="@+id/ostatne_button"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="130dp"
+                android:text="Ostatné"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/sladkosti_button"
+                app:layout_constraintTop_toBottomOf="@+id/suroviny_button" />
+
+            <Button
+                android:id="@+id/zelenina_button"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Zelenina"
+                app:layout_constraintBottom_toTopOf="@+id/suroviny_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ovocie_button"
+                app:layout_constraintTop_toBottomOf="@+id/mliecne_button" />
+        </android.support.constraint.ConstraintLayout>
+
+        ></ScrollView>
 </android.support.constraint.ConstraintLayout>
