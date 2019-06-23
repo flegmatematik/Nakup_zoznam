@@ -2,6 +2,7 @@ package com.example.nakup_zoznam;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -25,19 +26,23 @@ public class PopUp extends Activity {
         getWindow().setLayout((int) (sirka * 0.8), (int) (vyska * 0.6));
 
 
-        Cursor cur = Database.getInstance(this).showPecivo();
+        Cursor cur = Database.getInstance(this).showTyp(getIntent().getStringExtra("kurzor"));
         if(cur.moveToFirst()) {
             while(!cur.isAfterLast())
             {
+                final String objekt_nazov = cur.getString(0);
+                final int objekt_id = cur.getInt(1);
                 Button but = new Button(this);
                 but.setText(cur.getString(0));
-                int p = cur.getCount();
                 ActionBar.LayoutParams params = new ActionBar.LayoutParams((int)(sirka*0.4), ActionBar.LayoutParams.WRAP_CONTENT);
                 but.setLayoutParams(params);
                 but.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        Intent pop_par = new Intent(PopUp.this, vyber_parametrov.class);
+                        pop_par.putExtra( "nazovObjektu", objekt_nazov);
+                        pop_par.putExtra("id_objektu", objekt_id);
+                        startActivity(pop_par);
                     }
                 });
                 lay.addView(but);

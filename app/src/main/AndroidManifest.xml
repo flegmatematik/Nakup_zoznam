@@ -21,6 +21,9 @@
         <activity android:name=".PopUp"
             android:theme="@style/AppTheme.PopTheme"
             ></activity>
+        <activity android:name=".vyber_parametrov"
+            android:theme="@style/AppTheme.PopTheme"
+            ></activity>
 
     </application>
 

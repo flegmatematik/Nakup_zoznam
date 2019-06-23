@@ -31,7 +31,7 @@ public final class Schema  {
         public static final String KUPENY_OBJEKT_ID_NAKUP = "id_nakup";
         public static final String KUPENY_OBJEKT_ID_OBJEKT = "id_objekt";
         public static final String KUPENY_OBJEKT_KVANTITA = "kvantita";
-        public static final String KUPENY_OBJEKT_CENA = "cena";
+        public static final String KUPENY_OBJEKT_JEDNOTKA = "jednotka";
         public static final String KUPENY_OBJEKT_ZAPLATENE = "zaplatene";
     }
 }

@@ -23,8 +23,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        /*
         if(getSupportActionBar() != null)
             this.getSupportActionBar().hide();
+            */
         mojaDB = Database.getInstance(this);
         btnViewAll = (Button)findViewById(R.id.button_viewAll);
         btnPridaj = (Button)findViewById(R.id.button_Pridaj);
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Cursor res =  mojaDB.getObjektData();
+                Cursor res =  mojaDB.getNakupnyKosikData();
                 if(res.getCount() == 0)
                 {
                     //message
@@ -58,13 +60,13 @@ public class MainActivity extends AppCompatActivity {
                 StringBuffer buffer = new StringBuffer();
                 while (res.moveToNext())
                 {
-                    buffer.append("ID : " + res.getString(0) + "\n");
-                    buffer.append("NAZOV : " + res.getString(1) + "\n");
-                    buffer.append("TYP: " + res.getString(2) + "\n\n");
+                    buffer.append(res.getString(1) + " ");
+                    buffer.append(res.getString(2) + " ");
+                    buffer.append(res.getString(0) + "\n\n");
                 }
-
+                res.close();
                 //all data
-                showMessage("Data",buffer.toString());
+                showMessage("Váš Nákupný Košík ",buffer.toString());
 
             }
         });

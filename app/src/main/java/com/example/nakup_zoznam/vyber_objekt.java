@@ -1,6 +1,7 @@
 package com.example.nakup_zoznam;
 
 import android.content.Intent;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -39,50 +40,66 @@ public class vyber_objekt extends AppCompatActivity {
         pecivo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(vyber_objekt.this, PopUp.class));
+                Intent intent = new Intent(vyber_objekt.this, PopUp.class);
+                intent.putExtra("kurzor", "PECIVO");
+                startActivity(intent);
             }
         });
 
         mliecne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(vyber_objekt.this, PopUp.class));
+                Intent intent = new Intent(vyber_objekt.this, PopUp.class);
+                intent.putExtra("kurzor", "MLIECNE");
+                startActivity(intent);
             }
         });
         maso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(vyber_objekt.this, PopUp.class));
+                Intent intent = new Intent(vyber_objekt.this, PopUp.class);
+                intent.putExtra("kurzor", "MASO");
+                startActivity(intent);
             }
         });
         ovocie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(vyber_objekt.this, PopUp.class));
+                Intent intent = new Intent(vyber_objekt.this, PopUp.class);
+                intent.putExtra("kurzor", "OVOCIE");
+                startActivity(intent);
             }
         });
         zelenina.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(vyber_objekt.this, PopUp.class));
+                Intent intent = new Intent(vyber_objekt.this, PopUp.class);
+                intent.putExtra("kurzor", "ZELENINA");
+                startActivity(intent);
             }
         });
         suroviny.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(vyber_objekt.this, PopUp.class));
+                Intent intent = new Intent(vyber_objekt.this, PopUp.class);
+                intent.putExtra("kurzor", "SUROVINA");
+                startActivity(intent);
             }
         });
         sladkosti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(vyber_objekt.this, PopUp.class));
+                Intent intent = new Intent(vyber_objekt.this, PopUp.class);
+                intent.putExtra("kurzor", "SLADKOST");
+                startActivity(intent);
             }
         });
         ostatne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(vyber_objekt.this, PopUp.class));
+                Intent intent = new Intent(vyber_objekt.this, PopUp.class);
+                intent.putExtra("kurzor", "OSTATNE");
+                startActivity(intent);
             }
         });
 

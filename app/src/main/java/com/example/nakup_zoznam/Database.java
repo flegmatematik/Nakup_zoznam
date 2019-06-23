@@ -5,11 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.transition.Scene;
 
 import java.io.File;
 
 public class Database extends SQLiteOpenHelper {
     private  static Database instance;
+    private SQLiteDatabase db;
+    private int cislo_nakupu = 0;
 
     public static Database getInstance(Context context)
     {
@@ -28,7 +31,8 @@ public class Database extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    public void onCreate(SQLiteDatabase database) {
+        db = database;
 
         db.execSQL("CREATE TABLE " + Schema.Zoznam_Nakupov.ZOZNAM_NAKUPOV + " ("
                 + Schema.Zoznam_Nakupov.ZOZNAM_NAKUPOV_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -46,35 +50,41 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + Schema.Kupeny_Objekt.KUPENY_OBJEKT + " ("
                 + Schema.Kupeny_Objekt.KUPENY_OBJEKT_ID_OBJEKT + " INTEGER, "
                 + Schema.Kupeny_Objekt.KUPENY_OBJEKT_ID_NAKUP + " INTEGER, "
-                + Schema.Kupeny_Objekt.KUPENY_OBJEKT_KVANTITA + " INTEGER, "
-                + Schema.Kupeny_Objekt.KUPENY_OBJEKT_CENA + " REAL, "
-                + Schema.Kupeny_Objekt.KUPENY_OBJEKT_ZAPLATENE + "TEXT, "
+                + Schema.Kupeny_Objekt.KUPENY_OBJEKT_KVANTITA + " REAL, "
+                + Schema.Kupeny_Objekt.KUPENY_OBJEKT_JEDNOTKA + " TEXT, "
+                + Schema.Kupeny_Objekt.KUPENY_OBJEKT_ZAPLATENE + " TEXT, "
                 + " FOREIGN KEY (" + Schema.Kupeny_Objekt.KUPENY_OBJEKT_ID_OBJEKT + ") REFERENCES " + Schema.Objekt.OBJEKT + "(" + Schema.Objekt.OBJEKT_ID + "),"
                 + " FOREIGN KEY (" + Schema.Kupeny_Objekt.KUPENY_OBJEKT_ID_NAKUP + ") REFERENCES " + Schema.Nakup.NAKUP + "(" + Schema.Nakup.NAKUP_ID + "))");
 
 
-        pridajObjekt("BUCHTA", "PECIVO",db);
-        pridajObjekt("ROŽOK","PECIVO",db);
-        pridajObjekt("CHLEBA","PECIVO",db);
-        pridajObjekt("BAGETA","PECIVO",db);
-        pridajObjekt("SLADKÝ ROŽOK","PECIVO",db);
-        pridajObjekt("DONUT","PECIVO",db);
-        pridajObjekt("MLIEKO","MLIECNE",db);
-        pridajObjekt("MASLO","MLIECNE",db);
-        pridajObjekt("SYR","MLIECNE",db);
-        pridajObjekt("NÁTIERKA","MLIECNE",db);
-        pridajObjekt("JOGURT","MLIECNE",db);
-        pridajObjekt("SYROKRÉM","MLIECNE",db);
-        pridajObjekt("TVAROH","MLIECNE",db);
-        pridajObjekt("SMOTANA","MLIECNE",db);
-        pridajObjekt("KOND. MLIEKO","MLIECNE",db);
-        pridajObjekt("JABLKÁ","OVOCIE",db);
-        pridajObjekt("HRUŠKY","OVOCIE",db);
-        pridajObjekt("JAHODY","OVOCIE",db);
-        pridajObjekt("POMARANČE","OVOCIE",db);
-        pridajObjekt("MANDARÍNKY","OVOCIE",db);
-        pridajObjekt("MELÓN","OVOCIE",db);
-        pridajObjekt("BANÁNY","OVOCIE",db);
+        pridajObjekt("BUCHTA", "PECIVO");
+        pridajObjekt("ROŽOK","PECIVO");
+        pridajObjekt("CHLEBA","PECIVO");
+        pridajObjekt("BAGETA","PECIVO");
+        pridajObjekt("SLADKÝ ROŽOK","PECIVO");
+        pridajObjekt("DONUT","PECIVO");
+        pridajObjekt("MLIEKO","MLIECNE");
+        pridajObjekt("MASLO","MLIECNE");
+        pridajObjekt("SYR","MLIECNE");
+        pridajObjekt("NÁTIERKA","MLIECNE");
+        pridajObjekt("JOGURT","MLIECNE");
+        pridajObjekt("SYROKRÉM","MLIECNE");
+        pridajObjekt("TVAROH","MLIECNE");
+        pridajObjekt("SMOTANA","MLIECNE");
+        pridajObjekt("KOND. MLIEKO","MLIECNE");
+        pridajObjekt("GRECKY JOGURT", "MLIECNE");
+        pridajObjekt("ZMRZLINA","MLIECNE");
+        pridajObjekt("ŽINČICA", "MLIECNE");
+        pridajObjekt("ŽINČICA", "MLIECNE");
+        pridajObjekt("ŽINČICA", "MLIECNE");
+        pridajObjekt("ŽINČICA", "MLIECNE");
+        pridajObjekt("JABLKÁ","OVOCIE");
+        pridajObjekt("HRUŠKY","OVOCIE");
+        pridajObjekt("JAHODY","OVOCIE");
+        pridajObjekt("POMARANČE","OVOCIE");
+        pridajObjekt("MANDARÍNKY","OVOCIE");
+        pridajObjekt("MELÓN","OVOCIE");
+        pridajObjekt("BANÁNY","OVOCIE");
 
         /*
         db.execSQL("INSERT INTO " + Schema.Objekt.OBJEKT + " ("+ Schema.Objekt.OBJEKT_NAZOV +", " + Schema.Objekt.OBJEKT_TYP + ") " +
@@ -115,68 +125,29 @@ public class Database extends SQLiteOpenHelper {
     }
 
 
-    public void pridajObjekt(String nazov, String typ, SQLiteDatabase db)
+    public void pridajObjekt(String nazov, String typ)
     {
         db.execSQL("INSERT INTO " + Schema.Objekt.OBJEKT + " ("+ Schema.Objekt.OBJEKT_NAZOV +", " + Schema.Objekt.OBJEKT_TYP + ") " +
                 " VALUES ('" + nazov + "', '" + typ + "');");
     }
 
-    public Cursor showPecivo()
+    public Cursor showTyp(String typObjektu)
     {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("SELECT NAZOV FROM " + Schema.Objekt.OBJEKT
-                + " WHERE " + Schema.Objekt.OBJEKT_TYP + " LIKE 'PECIVO' " , null);
-        return res;
+        db = getReadableDatabase();
+        Cursor cur = db.rawQuery("SELECT " + Schema.Objekt.OBJEKT_NAZOV + ", " + Schema.Objekt.OBJEKT_ID + " FROM " + Schema.Objekt.OBJEKT
+                + " WHERE " + Schema.Objekt.OBJEKT_TYP + " LIKE '"+ typObjektu  +"' " , null);
+        return cur;
     }
-    public Cursor showMliecne()
-    {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("SELECT NAZOV FROM " + Schema.Objekt.OBJEKT
-                + " WHERE " + Schema.Objekt.OBJEKT_TYP + " LIKE 'MLIECNE_VYROBKY' " , null);
-        return res;
+
+    public void kupObjekt(int id_objektu, double kvantita,  String jednotka ){
+
+        db.execSQL("INSERT INTO " + Schema.Kupeny_Objekt.KUPENY_OBJEKT + " (" + Schema.Kupeny_Objekt.KUPENY_OBJEKT_ID_OBJEKT + ", "
+                + Schema.Kupeny_Objekt.KUPENY_OBJEKT_ID_NAKUP + ", " + Schema.Kupeny_Objekt.KUPENY_OBJEKT_KVANTITA+ ", "
+                + Schema.Kupeny_Objekt.KUPENY_OBJEKT_JEDNOTKA + ", " + Schema.Kupeny_Objekt.KUPENY_OBJEKT_ZAPLATENE + ") "
+                + " VALUES (" + id_objektu + ", " + cislo_nakupu + ", " + kvantita + ", '" + jednotka + "', 'NIE');");
     }
-    public Cursor showOvocie()
-    {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("SELECT NAZOV FROM " + Schema.Objekt.OBJEKT
-                + " WHERE " + Schema.Objekt.OBJEKT_TYP + " LIKE 'OVOCIE' " , null);
-        return res;
-    }
-    public Cursor showZelenina()
-    {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("SELECT NAZOV FROM " + Schema.Objekt.OBJEKT
-                + " WHERE " + Schema.Objekt.OBJEKT_TYP + " LIKE 'ZELENINA' " , null);
-        return res;
-    }
-    public Cursor showMaso()
-    {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("SELECT NAZOV FROM " + Schema.Objekt.OBJEKT
-                + " WHERE " + Schema.Objekt.OBJEKT_TYP + " LIKE 'MASO' " , null);
-        return res;
-    }
-    public Cursor showSuroviny()
-    {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("SELECT NAZOV FROM " + Schema.Objekt.OBJEKT
-                + " WHERE " + Schema.Objekt.OBJEKT_TYP + " LIKE 'SUROVINY' " , null);
-        return res;
-    }
-    public Cursor showSladkosti()
-    {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("SELECT NAZOV FROM " + Schema.Objekt.OBJEKT
-                + " WHERE " + Schema.Objekt.OBJEKT_TYP + " LIKE 'SLADKOSTI' " , null);
-        return res;
-    }
-    public Cursor showOstatne()
-    {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("SELECT NAZOV FROM " + Schema.Objekt.OBJEKT
-                + " WHERE " + Schema.Objekt.OBJEKT_TYP + " LIKE 'OSTATNE' " , null);
-        return res;
-    }
+
+
 
     public Cursor getObjektData() {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -193,6 +164,14 @@ public class Database extends SQLiteOpenHelper {
     public Cursor getZoznam_NakupovData() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + Schema.Zoznam_Nakupov.ZOZNAM_NAKUPOV , null);
+        return res;
+    }
+
+    public Cursor getNakupnyKosikData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("SELECT " + Schema.Objekt.OBJEKT_NAZOV + ", " + Schema.Kupeny_Objekt.KUPENY_OBJEKT_KVANTITA + ", " + Schema.Kupeny_Objekt.KUPENY_OBJEKT_JEDNOTKA
+                + "  FROM " + Schema.Kupeny_Objekt.KUPENY_OBJEKT + " INNER JOIN " + Schema.Objekt.OBJEKT
+                + " ON " + Schema.Objekt.OBJEKT + "." + Schema.Objekt.OBJEKT_ID + " = " + Schema.Kupeny_Objekt.KUPENY_OBJEKT + "." + Schema.Kupeny_Objekt.KUPENY_OBJEKT_ID_OBJEKT + ";", null);
         return res;
     }
 
